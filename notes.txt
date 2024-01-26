@@ -1,0 +1,18 @@
+code from: https://pythonprogramming.net/q-learning-reinforcement-learning-python-tutorial/
+
+Entrenamiento modelo p6:
+modelo malito
+1: uso de GPU
+2: aun así tardaba 2 tardes para 2mil simulaciones
+# Modelo medio
+2: Incremento valores de orden de magnitud de las recompensas asi como del numero de movimientos por episodio. 
+Aumenté el orden de magnitud de las recompensas para que fuese beneficióso o perjudicial comer o chocarese y que no 
+se quedase el modelo moviendose entre 2 casillas solo
+3: elimine de los movimientos posibles  el que se pudiese qudar quieto y tambien si se chocaba con pareces recibía 
+una penalización y se acababa la simulación (esto fue clave para reducir el tiempo de entrenamiento drasticamente)
+4: SAlvar el modelo al hacer control+c para asi poder continuar con el entrenamiento en distinos movimientos y 
+tambien poder reentrenar un modelo ya guardado.
+5: aumento del numero de jugadas por batch
+# modelo experto:
+reentrenamiento del modelo medio con menos jugadas posibles para evitar que se quede parado o alternando entre las 
+2 mismas casillas (de 200 jugadas como máximo a 40)
