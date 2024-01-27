@@ -173,7 +173,7 @@ class BlobEnv: # the square players
             reward = -self.MOVE_PENALTY
 
         done = False
-        if reward == self.FOOD_REWARD or reward == -self.ENEMY_PENALTY or reward == -self.COLLISION_PENALTY or self.episode_step >= 20:
+        if reward == self.FOOD_REWARD or reward == -self.ENEMY_PENALTY or reward == -self.COLLISION_PENALTY or self.episode_step >= 200:
             done = True
         
         return new_observation, reward, done
@@ -181,7 +181,7 @@ class BlobEnv: # the square players
     def render(self):
         img = self.get_image()
         img = img.resize((800,800)) # resizing so we can see our agent
-        cv2.imshow("Simulation: Master AI", np.array(img)) # show it!
+        cv2.imshow("Simulation: Intermediate AI", np.array(img)) # show it!
         cv2.waitKey(200) # pon el valor a 0 si quieres verlo realmente pero tarda bastante en entrenar los episodios requeridos para visualizar (cada 50 ep)
 
     # FOR CNN #
@@ -227,14 +227,14 @@ class DQNAgent:
     def get_qs(self, state):
         return self.model.predict(np.array(state).reshape(-1,*state.shape)/255)[0]
 
-model_already_created = "models/modelo_legendario_256X2___500.00max__355.90avg_-200.00min__1706264767.model"
+model_already_created = "models/modelo_medio256X2___500.00max__204.84avg_-318.00min__1706193422.model"
 agent = DQNAgent(model_already_created)
 
 print(" Presiona cualquier boton para comenzar la simulación")
 init_img = np.zeros((10, 10, 3), dtype=np.uint8)
 init_img = Image.fromarray(init_img, 'RGB')
 init_img = init_img.resize((800,800)) # resizing so we can see our agent
-cv2.imshow("Simulation: Master AI", np.array(init_img))
+cv2.imshow("Simulation: Intermediate AI", np.array(init_img))
 cv2.waitKey() # espera a pulsar un boton para simular
 # hacemos que el agente participe con el entorno
 for episode in tqdm(range(1, EPISODES+1), ascii=True, unit='episodes'): # chars use ASCII and calling the "unit" an "episode"
